@@ -26,7 +26,8 @@ function setup() {
   ground.x = ground.width/2;
   console.log(ground.x);
 
-  
+  FoodGroup = new Group();
+  obstacleGroup = new Group();
 }
 
 
@@ -47,9 +48,6 @@ function draw() {
   spawnBananas();
   spawnObstacles();
   
-  FoodGroup = new Group();
-  obstacleGroup = new Group();
-  
   
   survivalTime = Math.ceil(frameCount/frameRate())
   stroke("black");
@@ -57,7 +55,7 @@ function draw() {
   fill("black");
   text("Survival Time: " + survivalTime, 100,50);
   
-  
+  if(obstacleGroup.isTouching(monkey)){ ground.velocityX = 0; monkey.velocityY = 0; obstacleGroup.setVelocityXEach(0); FoodGroup.setVelocityXEach(0); obstacleGroup.setLifetimeEach(-1); FoodGroup.setLifetimeEach(-1); }
   drawSprites();
 }
 
